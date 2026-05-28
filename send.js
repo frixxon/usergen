@@ -34,7 +34,6 @@ const payload = JSON.stringify({
     {
       title: "New User Available!",
       description: `\`\`\`${username}\`\`\``,
-      color: null,
       footer: {
         text: "@frauding"
       },
@@ -65,10 +64,18 @@ const options = {
 
 const req = https.request(options, (res) => {
   console.log(`Status Code: ${res.statusCode}`);
+
+  res.on("data", () => {});
+
+  res.on("end", () => {
+    console.log("Webhook sent successfully.");
+    process.exit(0);
+  });
 });
 
 req.on("error", (error) => {
   console.error(error);
+  process.exit(1);
 });
 
 req.write(payload);
