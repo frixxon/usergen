@@ -1,11 +1,9 @@
 name: Discord Webhook Sender
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: "*/45 * * * *"
-
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
   send-webhook:
