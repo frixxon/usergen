@@ -1,0 +1,25 @@
+name: Discord Webhook Sender
+
+on:
+  schedule:
+    - cron: "*/45 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  send-webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run webhook script
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node send.js
