@@ -16,14 +16,25 @@ function randomString(length, lettersOnly = false) {
 }
 
 function generateUsername() {
-  const generators = [
-    () => randomString(3, false),
-    () => randomString(3, true),
-    () => randomString(4, false),
-    () => randomString(4, true),
-  ];
+  const roll = Math.random();
 
-  return generators[Math.floor(Math.random() * generators.length)]();
+  // 80%
+  if (roll < 0.80) {
+    return randomString(4, false);
+  }
+
+  // 15%
+  if (roll < 0.95) {
+    return randomString(4, true);
+  }
+
+  // 4%
+  if (roll < 0.99) {
+    return randomString(3, false);
+  }
+
+  // 1%
+  return randomString(3, true);
 }
 
 const username = generateUsername();
